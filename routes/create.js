@@ -4,7 +4,12 @@ var React = require('react');
 
 /* GET users listing. */
 router.get('/create', function(req, res) {
-	res.send(React.renderComponentToString(require('../components/createPost.jsx')()));
+
+	res.render('index', {
+		title: 'Express',
+		content: React.renderComponentToString(require('../components/CreatePost')())
+	});
+
 });
 
 module.exports = router;

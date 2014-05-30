@@ -4,6 +4,7 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var browserify = require('browserify-middleware');
 
 var app = express();
 
@@ -20,6 +21,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
+app.get('/public/javascripts/app.js', browserify('./browser/app.js', {
+    transform: ['reactify']
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', require('./routes/index'));
