@@ -1,9 +1,8 @@
 /** @jsx React.DOM */
 
-// Simulate long JS load time
-setTimeout(function() {
-  var React = require('react');
-  var CreatePost = require('../components/CreatePost');
+var React = require('react');
 
-  React.renderComponent(<CreatePost />, document.getElementById('react-root'));
-}, 3000);
+if (window.location.pathname === '/create') {
+	var CreatePost = require('../components/CreatePost');
+	React.renderComponent(<CreatePost />, document.getElementById('react-root'));
+}

@@ -1,13 +1,17 @@
 /** @jsx React.DOM */
 
 var React = require('react');
-var marked = require('react-marked');
+var marked = require('../vendor/react-marked');
 
 module.exports = React.createClass({
   getInitialState: function() {
+    var now = new Date();
+
     return {
+      id: now.getTime(),
       title: '',
-      text: ''
+      text: '',
+
     };
   },
   onChangeTitle: function(e) {
@@ -30,12 +34,13 @@ module.exports = React.createClass({
     return (
       <div>
         <h1>Create New Post</h1>
-        <form onSubmit={this.handleSubmit}>
-          <input onChange={this.onChangeTitle} value={this.state.title} />
-          <input onChange={this.onChangeText} value={this.state.text} />
-          <button>Save</button>
+        <form method="post" onSubmit={this.handleSubmit}>
+          <input type="hidden" name="id" value={this.state.id} />
+          <input onChange={this.onChangeTitle} cols="50" name="title" value={this.state.title} /><br />
+          <textarea rows="15" cols="50" onChange={this.onChangeText} name="text" value={this.state.text}></textarea><br />
+          <button type="submit">Save</button>
         </form>
-        <div>{this.renderOutput()}</div>
+        <div>{ this.renderOutput() }</div>
       </div>
     );
   }

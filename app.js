@@ -26,8 +26,8 @@ app.get('/public/javascripts/app.js', browserify('./browser/app.js', {
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', require('./routes/index'));
-app.get('/create', require('./routes/create'));
+app.use(require('./routes/index'));
+app.use(require('./routes/create'));
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
