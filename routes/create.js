@@ -7,7 +7,7 @@ var fs = require('fs');
 router.get('/create', function(req, res) {
 
 	res.render('index', {
-		title: 'Express',
+		title: 'Create a New Post',
 		content: React.renderComponentToString(require('../components/CreatePost')())
 	});
 
@@ -15,7 +15,7 @@ router.get('/create', function(req, res) {
 
 router.post('/create', function(req, res) {
 
-	fs.writeFile(req.body.id + '.json', JSON.stringify(req.body, null, 4), function() {
+	fs.writeFile('posts/' + req.body.id + '.json', JSON.stringify(req.body, null, 4), function() {
 		res.redirect(302, '/');
 	});
 
